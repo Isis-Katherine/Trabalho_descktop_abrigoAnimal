@@ -1,0 +1,34 @@
+[
+  {
+    "nome": "Maria Oliveira",
+    "dataNascimento": "05/05/1990 00:00",
+    "cpf": "123.456.789-00",
+    "telefone": "(65) 99999-1111",
+    "email": "maria@email.com",
+    "cep": "78000-000"
+  },
+  {
+    "nome": "João Pereira",
+    "dataNascimento": "12/12/1985 00:00",
+    "cpf": "987.654.321-00",
+    "telefone": "(11) 98888-2222",
+    "email": "joao@email.com",
+    "cep": "01000-000"
+  },
+  {
+    "nome": "Fernanda Souza",
+    "dataNascimento": "22/10/1993 00:00",
+    "cpf": "456.789.123-00",
+    "telefone": "(11) 97777-3333",
+    "email": "fernanda@email.com",
+    "cep": "02000-000"
+  },
+  {
+    "nome": "Isis",
+    "dataNascimento": "24/06/2026 01:25",
+    "cpf": "112.455.777-14",
+    "telefone": "(65) 98778-1102",
+    "email": "isis@gmail.com",
+    "cep": "00000-000"
+  }
+]

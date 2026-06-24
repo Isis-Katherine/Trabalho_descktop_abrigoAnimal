@@ -1,0 +1,22 @@
+[
+  {
+    "nome": "Joui",
+    "dataResgate": "24/06/2026 01:23",
+    "especie": "Cachorro",
+    "raca": "",
+    "porte": "Grande",
+    "castrado": false,
+    "adotado": false,
+    "caminhoImagem": "imagens\\caramelo.jpg"
+  },
+  {
+    "nome": "Liz",
+    "dataResgate": "24/06/2026 01:24",
+    "especie": "Gato",
+    "raca": "",
+    "porte": "Pequeno",
+    "castrado": false,
+    "adotado": true,
+    "caminhoImagem": "imagens\\gato1.jpg"
+  }
+]

@@ -1,0 +1,28 @@
+[
+  {
+    "id": "ADO-0001",
+    "dataAdoacao": "10/06/2026 00:00",
+    "adotante": {
+      "nome": "Isis",
+      "dataNascimento": "24/06/2026 01:25",
+      "cpf": "112.455.777-14",
+      "telefone": "(65) 98778-1102",
+      "email": "isis@gmail.com",
+      "cep": "00000-000"
+    },
+    "animal": {
+      "nome": "Liz",
+      "dataResgate": "24/06/2026 01:24",
+      "especie": "Gato",
+      "raca": "",
+      "porte": "Pequeno",
+      "castrado": false,
+      "adotado": true,
+      "caminhoImagem": "imagens\\gato1.jpg"
+    },
+    "devolucao": false,
+    "responsavel": "Ana Costa",
+    "comprovante": "comprovante_ADO-0001.pdf",
+    "observacoes": ""
+  }
+]
