@@ -18,6 +18,7 @@ public class TelaPrincipalAbrigo extends App {
     private final JPanel painelCentral = new JPanel(cardLayout);
     private PainelAdocao painelAdocao;
     private PainelAdotante painelAdotante;
+    private PainelAnimais painelAnimais;
     private JPanel painelInicio;
 
     public TelaPrincipalAbrigo() {
@@ -27,13 +28,13 @@ public class TelaPrincipalAbrigo extends App {
         painelCentral.setBackground(FUNDO);
         painelInicio = criarPainelInicio();
         painelCentral.add(painelInicio, "inicio");
-        painelCentral.add(new PainelAnimais(), "animais");
+        painelAnimais = new PainelAnimais();
+        painelCentral.add(painelAnimais, "animais");
         painelAdocao = new PainelAdocao();
         painelAdotante = new PainelAdotante();
 
         painelCentral.add(painelAdocao, "adocao");
         painelCentral.add(painelAdotante, "adotante");
-        // painelCentral.add(new PainelEstoque(), "estoque");
 
         JPanel painelPrincipal = new JPanel(new BorderLayout());
         painelPrincipal.setBackground(FUNDO);
@@ -51,6 +52,9 @@ public class TelaPrincipalAbrigo extends App {
 
         if ("adotante".equals(tela) && painelAdotante != null) {
             painelAdotante.atualizarTabela();
+        }
+        if ("animais".equals(tela) && painelAnimais != null) {
+             painelAnimais.atualizarTabela();
         }
 
         if ("inicio".equals(tela)) {
@@ -88,7 +92,6 @@ public class TelaPrincipalAbrigo extends App {
         MenuBotao btnInicio  = new MenuBotao("Inicio",  "/icons/MenuHome.png");
         MenuBotao btnAnimais = new MenuBotao("Animais", "/icons/MenuAnimais.png");
         MenuBotao btnAdocao  = new MenuBotao("Doação",  "/icons/MenuDoacao.png");
-        MenuBotao btnEstoque = new MenuBotao("Estoque", "/icons/MenuEstoque.png");
         MenuBotao btnAdotante = new MenuBotao("Adotante", "/icons/MenuAdotante.png");
 
         // Cada botão só troca o centro — sem abrir nova janela, sem dispose()
@@ -96,7 +99,6 @@ public class TelaPrincipalAbrigo extends App {
         btnAnimais.addActionListener(e -> navegarPara("animais"));
         btnAdocao .addActionListener(e -> navegarPara("adocao"));
         btnAdotante.addActionListener(e -> navegarPara("adotante"));
-        btnEstoque.addActionListener(e -> navegarPara("estoque"));
 
         JLabel rodape = new JLabel("Juntos por vidas melhores.");
         rodape.setFont(new Font("Segoe UI", Font.PLAIN, 16));
@@ -116,7 +118,6 @@ public class TelaPrincipalAbrigo extends App {
         menu.add(Box.createVerticalStrut(15));
         menu.add(btnAdotante);
         menu.add(Box.createVerticalStrut(15));
-        menu.add(btnEstoque);
         menu.add(Box.createVerticalGlue());
         menu.add(rodape);
 

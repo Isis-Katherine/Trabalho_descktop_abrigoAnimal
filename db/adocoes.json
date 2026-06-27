@@ -20,9 +20,88 @@
       "adotado": true,
       "caminhoImagem": "imagens\\gato1.jpg"
     },
-    "devolucao": false,
+    "devolucao": true,
+    "dataDevolucao": "26/06/2026 00:00",
     "responsavel": "Ana Costa",
     "comprovante": "comprovante_ADO-0001.pdf",
+    "observacoes": ""
+  },
+  {
+    "id": "ADO-0002",
+    "dataAdoacao": "20/06/2026 00:00",
+    "adotante": {
+      "nome": "Fernanda Souza",
+      "dataNascimento": "22/10/1993 00:00",
+      "cpf": "456.789.123-00",
+      "telefone": "(11) 97777-3333",
+      "email": "fernanda@email.com",
+      "cep": "02000-000"
+    },
+    "animal": {
+      "nome": "Joui",
+      "dataResgate": "24/06/2026 01:23",
+      "especie": "Cachorro",
+      "raca": "",
+      "porte": "Grande",
+      "castrado": false,
+      "adotado": true,
+      "caminhoImagem": "imagens\\caramelo.jpg"
+    },
+    "devolucao": false,
+    "responsavel": "Ana Costa",
+    "comprovante": "comprovante_ADO-0002.pdf",
+    "observacoes": ""
+  },
+  {
+    "id": "ADO-0003",
+    "dataAdoacao": "20/06/2026 00:00",
+    "adotante": {
+      "nome": "Isis",
+      "dataNascimento": "24/06/2026 01:25",
+      "cpf": "112.455.777-14",
+      "telefone": "(65) 98778-1102",
+      "email": "isis@gmail.com",
+      "cep": "00000-000"
+    },
+    "animal": {
+      "nome": "Jasmin",
+      "dataResgate": "26/06/2026 20:10",
+      "especie": "Gato",
+      "raca": "",
+      "porte": "Médio",
+      "castrado": false,
+      "adotado": true,
+      "caminhoImagem": "imagens\\gato3.jpg"
+    },
+    "devolucao": false,
+    "responsavel": "Ana Costa",
+    "comprovante": "comprovante_ADO-0003.pdf",
+    "observacoes": ""
+  },
+  {
+    "id": "ADO-0004",
+    "dataAdoacao": "21/06/2026 00:00",
+    "adotante": {
+      "nome": "Maria Oliveira",
+      "dataNascimento": "05/05/1990 00:00",
+      "cpf": "123.456.789-00",
+      "telefone": "(65) 99999-1111",
+      "email": "maria@email.com",
+      "cep": "78000-000"
+    },
+    "animal": {
+      "nome": "Liz",
+      "dataResgate": "24/06/2026 01:24",
+      "especie": "Gato",
+      "raca": "",
+      "porte": "Pequeno",
+      "castrado": false,
+      "adotado": true,
+      "caminhoImagem": "imagens\\gato1.jpg"
+    },
+    "devolucao": false,
+    "responsavel": "Ana Costa",
+    "comprovante": "comprovante_ADO-0004.pdf",
     "observacoes": ""
   }
 ]

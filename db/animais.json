@@ -6,7 +6,7 @@
     "raca": "",
     "porte": "Grande",
     "castrado": false,
-    "adotado": false,
+    "adotado": true,
     "caminhoImagem": "imagens\\caramelo.jpg"
   },
   {
@@ -18,5 +18,45 @@
     "castrado": false,
     "adotado": true,
     "caminhoImagem": "imagens\\gato1.jpg"
+  },
+  {
+    "nome": "Totó",
+    "dataResgate": "26/06/2026 20:08",
+    "especie": "Cachorro",
+    "raca": "Pastor Alemão",
+    "porte": "Grande",
+    "castrado": false,
+    "adotado": false,
+    "caminhoImagem": "imagens\\tica.jpg"
+  },
+  {
+    "nome": "Orelha",
+    "dataResgate": "26/06/2026 20:09",
+    "especie": "Cachorro",
+    "raca": "",
+    "porte": "Médio",
+    "castrado": false,
+    "adotado": false,
+    "caminhoImagem": "imagens\\cachorro2.jpg"
+  },
+  {
+    "nome": "Jasmin",
+    "dataResgate": "26/06/2026 20:10",
+    "especie": "Gato",
+    "raca": "",
+    "porte": "Médio",
+    "castrado": false,
+    "adotado": true,
+    "caminhoImagem": "imagens\\gato3.jpg"
+  },
+  {
+    "nome": "Machinha",
+    "dataResgate": "26/06/2026 20:14",
+    "especie": "Gato",
+    "raca": "",
+    "porte": "Médio",
+    "castrado": false,
+    "adotado": false,
+    "caminhoImagem": "imagens\\gato2.jpg"
   }
 ]

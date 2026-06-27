@@ -2,6 +2,8 @@ package screen;
 
 import javax.swing.*;
 import javax.swing.border.*;
+import javax.swing.text.MaskFormatter;
+
 import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
 import java.util.Date;
@@ -21,9 +23,10 @@ public class DialogEditarAdoacao extends JDialog {
     private Runnable refreshCallback;
     private JComboBox<String> comboAnimal;
     private JComboBox<String> comboAdotante;
-    private JTextField campoData;
     private JCheckBox chkDevolvido;
-    private JTextField campoDataDevolucao;
+    private JFormattedTextField  campoData;
+    private JFormattedTextField  campoDataDevolucao;
+    private JPanel grupoDataDevolucao;
 
 
     public DialogEditarAdoacao(
@@ -102,19 +105,41 @@ public class DialogEditarAdoacao extends JDialog {
         }
         comboAdotante.setSelectedItem(adotanteNome);
 
-        campoData = criarCampoTextoComponente(dataStr);
+        campoData = criarCampoData(dataStr);
         chkDevolvido = new JCheckBox("Animal devolvido");
-
-        campoDataDevolucao = criarCampoTextoComponente("");
-
+        campoDataDevolucao = criarCampoData("");
+        campoDataDevolucao.setEnabled(false);
+    
         if (adocao.getDataDevolucao() != null) {
-
             campoDataDevolucao.setText(
                 sdf.format(adocao.getDataDevolucao())
             );
-
             chkDevolvido.setSelected(true);
         }
+
+        // Habilita/desabilita o campo conforme o checkbox
+        campoDataDevolucao.setEnabled(chkDevolvido.isSelected());
+
+        chkDevolvido.addActionListener(e -> {
+
+            boolean devolvido = chkDevolvido.isSelected();
+
+        grupoDataDevolucao.setVisible(devolvido);
+
+        campoDataDevolucao.setEnabled(devolvido);
+
+        if (!devolvido) {
+            campoDataDevolucao.setText("");
+        }
+
+        form.revalidate();
+        form.repaint();
+
+            if (!devolvido) {
+                campoDataDevolucao.setText("");
+            }
+
+        });
 
         configurarAutoCompleteComboAnimal();
         configurarAutoCompleteComboAdotante();
@@ -135,53 +160,62 @@ public class DialogEditarAdoacao extends JDialog {
         form.add(criarGrupo("Data da adoção", campoData));
         form.add(Box.createVerticalStrut(20));
         form.add(chkDevolvido);
-        form.add(Box.createVerticalStrut(20));
-        form.add(criarGrupo(
+        grupoDataDevolucao = criarGrupo(
             "Data da devolução",
             campoDataDevolucao
-        ));
+        );
+        grupoDataDevolucao.setVisible(chkDevolvido.isSelected());
+        form.add(Box.createVerticalStrut(20));
+        form.add(grupoDataDevolucao);
+    ;
 
         return form;
     }
 
-    private JTextField criarCampoTextoComponente(String valor) {
-        JTextField campo = new JTextField(valor) {
-            @Override
-            protected void paintComponent(Graphics g) {
-                Graphics2D g2 = (Graphics2D) g.create();
-                g2.setRenderingHint(
-                    RenderingHints.KEY_ANTIALIASING,
-                    RenderingHints.VALUE_ANTIALIAS_ON
-                );
-                g2.setColor(BRANCO);
-                g2.fill(new RoundRectangle2D.Float(
-                    0,
-                    0,
-                    getWidth(),
-                    getHeight(),
-                    10,
-                    10
-                ));
-                g2.setColor(CINZA_BORDA);
-                g2.draw(new RoundRectangle2D.Float(
-                    0,
-                    0,
-                    getWidth() - 1,
-                    getHeight() - 1,
-                    10,
-                    10
-                ));
-                g2.dispose();
-                super.paintComponent(g);
-            }
-        };
+    private JFormattedTextField criarCampoData(String valor) {
 
-        campo.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-        campo.setBorder(new EmptyBorder(10, 12, 10, 12));
-        campo.setOpaque(false);
-        campo.setMaximumSize(new Dimension(Integer.MAX_VALUE, 42));
-        campo.setAlignmentX(Component.LEFT_ALIGNMENT);
-        return campo;
+        try {
+
+            MaskFormatter mascara = new MaskFormatter("##/##/####");
+            mascara.setPlaceholderCharacter('_');
+
+            JFormattedTextField campo = new JFormattedTextField(mascara) {
+
+                @Override
+                protected void paintComponent(Graphics g) {
+                    Graphics2D g2 = (Graphics2D) g.create();
+                    g2.setRenderingHint(
+                            RenderingHints.KEY_ANTIALIASING,
+                            RenderingHints.VALUE_ANTIALIAS_ON);
+
+                    g2.setColor(BRANCO);
+                    g2.fill(new RoundRectangle2D.Float(
+                            0, 0, getWidth(), getHeight(), 10, 10));
+
+                    g2.setColor(CINZA_BORDA);
+                    g2.draw(new RoundRectangle2D.Float(
+                            0, 0, getWidth() - 1, getHeight() - 1, 10, 10));
+
+                    g2.dispose();
+
+                    super.paintComponent(g);
+                }
+
+            };
+
+            campo.setText(valor);
+            campo.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+            campo.setBorder(new EmptyBorder(10, 12, 10, 12));
+            campo.setOpaque(false);
+            campo.setMaximumSize(new Dimension(Integer.MAX_VALUE, 42));
+            campo.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+            return campo;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new JFormattedTextField();
+        }
     }
 
     private JPanel criarGrupo(String rotulo, JTextField campo) {
@@ -296,7 +330,7 @@ public class DialogEditarAdoacao extends JDialog {
                 ? comboAdotante.getSelectedItem().toString().trim()
                 : "";
                 
-            if (strData.isEmpty()) {
+           if (strData.replace("/", "").contains("_")) {
                 JOptionPane.showMessageDialog(this, "Por favor, especifique a data da adoção!", "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
@@ -352,36 +386,53 @@ public class DialogEditarAdoacao extends JDialog {
             adocao.setAdotante(newAdotante);
             adocao.setDataAdoacao(dataAdoacao);
 
-            if (chkDevolvido.isSelected()) {
+        if (chkDevolvido.isSelected()) {
 
-                try {
+            try {
 
-                    java.text.SimpleDateFormat sdf =
-                        new java.text.SimpleDateFormat("dd/MM/yyyy");
+                java.text.SimpleDateFormat sdf =
+                    new java.text.SimpleDateFormat("dd/MM/yyyy");
 
-                    Date dataDevolucao =
-                        sdf.parse(campoDataDevolucao.getText());
+                String textoData = campoDataDevolucao.getText().trim();
 
-                    adocao.setDataDevolucao(dataDevolucao);
-
-                    newAnimal.setaAotado(false);
-
-                } catch (Exception ex) {
-
+                if (textoData.contains("_")) {
                     JOptionPane.showMessageDialog(
                         this,
-                        "Data de devolução inválida!"
+                        "Informe a data da devolução!"
                     );
-
                     return;
                 }
 
-            } else {
+                Date dataDevolucao = sdf.parse(textoData);
 
-                adocao.setDataDevolucao(null);
+                adocao.setDataDevolucao(dataDevolucao);
 
-                newAnimal.setaAotado(true);
+                // Marca como devolvido
+                adocao.setDevolucao(true);
+
+                // Animal volta para o abrigo
+                newAnimal.setaAotado(false);
+
+            } catch (Exception ex) {
+
+                JOptionPane.showMessageDialog(
+                    this,
+                    "Data de devolução inválida!"
+                );
+
+                return;
             }
+
+        } else {
+
+            adocao.setDataDevolucao(null);
+
+            // Marca como adoção ativa
+            adocao.setDevolucao(false);
+
+            // Animal continua adotado
+            newAnimal.setaAotado(true);
+        }
 
             utils.SistemaDados.save();
 
